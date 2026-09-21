@@ -25,7 +25,16 @@ for agents that run on your machine (see "MCP server" below).
 
 ## Install
 
-Build from source (the only install path today):
+With Homebrew (macOS and Linux):
+
+```bash
+brew install appcues/tap/appcues
+```
+
+The formula lives in [appcues/homebrew-tap](https://github.com/appcues/homebrew-tap)
+and follows every release automatically. Upgrade with `brew upgrade appcues`.
+
+### From source
 
 ```bash
 git clone https://github.com/appcues/cli.git
