@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.2] - 2026-09-10
 
 ### Removed
-- `skills/`, `plugin.json`, and `.claude-plugin/` moved to the [appcues/skills](https://github.com/appcues/skills) repo, which installs as one plugin on Hermes, Claude Code, Codex, and OpenClaw. `runtimes/sandbox.sh` clones that repo into the gitignored `runtimes/skills/` and the sandboxes mount it.
+- `skills/`, `plugin.json`, and `.claude-plugin/` moved to the [appcues/skills](https://github.com/appcues/skills) repo, which installs as one plugin on Hermes, Claude Code, Codex, and OpenClaw.
 
 ## [0.2.1] - 2026-09-10
 
@@ -107,7 +107,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typed exit codes (0 ok, 1 unexpected, 2 usage, 3 config/auth, 4 API 4xx, 5 rate-limited/5xx after retries) and failures as one structured JSON line on stderr, so scripts and agents can branch without parsing prose
 - Non-interactive `appcues profiles add` via `--api-key`/`--api-secret`/`--account-id`/`--env` flags; missing flags without a terminal fail with a clear error instead of hanging on a prompt
 - Client-side request throttling (~50 req/s) to stay under the API's 60 req/s limit
-- `runtimes/` directory with local-docker skill-dev sandboxes for Hermes (`runtimes/hermes/`) and OpenClaw (`runtimes/openclaw/`), plus the runtime-vs-skill convention in `runtimes/README.md`
 - `skills/` directory with the portable skill contract (`skills/README.md`) and three skills authored against it: `account-inventory` (account contents report), `analytics-query` (analytics questions and raw event exports, with verified reference specs), and `weekly-performance-digest` (published flows' performance vs the previous period, built on `flows +digest`)
 - CI release binaries: every merge to `main` builds `appcues` for linux arm64 and macOS arm64, uploaded as workflow artifacts named `appcues-<arch>-<version>-<short-sha>`
 
@@ -118,7 +117,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New `base_url` profile field and `APPCUES_BASE_URL` env var: an explicit API origin that wins over `env`, for local apis and proxies; `appcues status` now prints the URL it verified against
 - `appcues jobs get` now reads the analytics exports route; job ids minted by the legacy email-delivery export system return 404 and cannot be inspected via the CLI
 - Repo restructured: the Rust crate moved from the root into `crates/appcues/`, making room for `skills/` and other non-CLI deliverables
-- Runtime credentials now live in one shared, gitignored `runtimes/.env` loaded via docker-compose `env_file` (moved from per-runtime `data/.env`)
 
 ### Fixed
 

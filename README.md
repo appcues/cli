@@ -7,12 +7,8 @@ Mutating commands (publishing, editing, deleting) are supported; access
 control comes from the API key's permissions (read-only vs write) and from
 the operator running the CLI.
 
-The repo also hosts the pieces around the CLI:
-
-| Path | What it is |
-|---|---|
-| `crates/appcues/` | The Rust CLI crate — all `cargo` commands run from here |
-| `runtimes/` | How to boot an agent runtime sandbox and point it at the skills — see `runtimes/README.md` |
+The Rust CLI crate lives in `crates/appcues/`; all `cargo` commands run
+from there.
 
 The agent skills that use this CLI, and the guide to setting up an agent
 runtime with it, live in [appcues/skills](https://github.com/appcues/skills).

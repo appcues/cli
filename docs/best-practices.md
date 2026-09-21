@@ -60,8 +60,8 @@ actually caught the mistake; delete items that stop earning their place.
 ## Docs
 
 - **READMEs must work on a fresh clone.** If a step needs a gitignored
-  file (`runtimes/.env`), the bootstrap that creates it comes *before*
-  the first command that requires it.
+  file (a `.env`), the bootstrap that creates it comes *before* the
+  first command that requires it.
 - Docs change in the same PR as the behavior they describe (README
   exit-code table, CHANGELOG entry).
 - **`--help` text is an agent routing surface.** Agents explore a CLI via

@@ -4,8 +4,8 @@ Agent-facing guide to this repo. `CLAUDE.md` points here.
 
 ## Hard rules
 
-- **Never read, print, or diff `.env` files** — `runtimes/.env` holds live
-  keys. Move/mount/chmod only.
+- **Never read, print, or diff `.env` files** — they hold live keys.
+  Move/mount/chmod only.
 - **Tests never touch real services or real config.** All HTTP is mocked
   with `httpmock` (client takes its base URL as a parameter); config tests
   use temp files; credentials in tests are always fake
@@ -17,16 +17,11 @@ Agent-facing guide to this repo. `CLAUDE.md` points here.
 
 ## What this repo is
 
-An agent toolkit around the Appcues Public API v2, two parts:
+The Rust CLI around the Appcues Public API v2, in `crates/appcues/` (all
+cargo commands run from here).
 
-- `crates/appcues/` — the Rust CLI (all cargo commands run from here)
-- `runtimes/` — how to boot a local dev sandbox (hermes, openclaw) and
-  point it at the skills. Nothing Appcues-specific belongs here: delete
-  `runtimes/` and the skills must still describe complete work.
-
-The skills themselves live in the `appcues/skills` repo. `sandbox.sh`
-clones it into the gitignored `runtimes/skills/` and the sandboxes mount
-that checkout.
+The agent skills that use it, and the runtime setup guides (Hermes,
+OpenClaw, Claude Code, Codex), live in the `appcues/skills` repo.
 
 ## CLI architecture
 
@@ -143,8 +138,5 @@ dependency; that warning is expected and does not fail the gate.
   it per-request and bound stalls with `timeout_recv_body` instead.
   `read_to_string` caps at 10MB; stream big bodies via
   `body_mut().as_reader()` + `io::copy`.
-- Docker Desktop (virtiofs) rejects single-file bind mounts nested inside
-  an already-mounted directory — runtimes load `runtimes/.env` via compose
-  `env_file:`; edits apply on the next `docker compose up -d`, not live.
 - `docs/superpowers/` and `.superpowers/` are gitignored working docs —
   don't reference them from versioned files.
