@@ -32,7 +32,7 @@ brew install appcues/tap/appcues
 ```
 
 The formula lives in [appcues/homebrew-tap](https://github.com/appcues/homebrew-tap)
-and follows every release automatically. Upgrade with `brew upgrade appcues`.
+and is updated after each release. Upgrade with `brew upgrade appcues`.
 
 ### From source
 
