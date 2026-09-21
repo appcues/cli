@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Developer entry point; every cargo command runs from crates/appcues.
+#
+#   scripts/dev build              release build -> crates/appcues/target/release/appcues
+#   scripts/dev install            cargo install --path . (puts appcues on PATH, ~/.cargo/bin)
+#   scripts/dev test               the CI gate: fmt --check, clippy -D warnings, test
+#   scripts/dev run <args...>      run the CLI from source, e.g. scripts/dev run flows list
+set -euo pipefail
+
+self=$(cd "$(dirname "$0")" && pwd)/$(basename "$0")
+cd "$(dirname "$0")/../crates/appcues"
+
+case "${1:-}" in
+  build)
+    cargo build --release --locked
+    echo "built target/release/appcues"
+    ;;
+  install)
+    cargo install --path . --locked
+    ;;
+  test)
+    cargo fmt --check
+    cargo clippy --locked --all-targets -- -D warnings
+    cargo test --locked
+    ;;
+  run)
+    shift
+    cargo run --quiet -- "$@"
+    ;;
+  *)
+    sed -n '2,7p' "$self" | sed 's/^# \{0,1\}//'
+    exit 2
+    ;;
+esac

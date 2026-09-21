@@ -1,0 +1,23 @@
+services:
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    restart: unless-stopped
+    command: gateway run
+    ports:
+      - "8642:8642" # gateway API
+      - "9119:9119" # dashboard (only reached when HERMES_DASHBOARD=1)
+    volumes:
+      # per-checkout Hermes state (gitignored)
+      - ./data:/opt/data
+      # the appcues/skills checkout that sandbox.sh clones into runtimes/skills,
+      # live-mounted as the "appcues" category
+      - ../skills/skills:/opt/data/skills/appcues:ro
+    env_file:
+      - ../.env
+    environment:
+      - HERMES_DASHBOARD=1
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"

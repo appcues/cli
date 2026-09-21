@@ -1,0 +1,13 @@
+/crates/appcues/target
+/.superpowers
+.env
+/docs/superpowers
+/runtimes/hermes/data
+/runtimes/openclaw/data
+/runtimes/skills
+/docs/internal
+# personal tooling (CodeGraph, Claude Code hooks)
+/.mcp.json
+/.claude
+/.codegraph
+/.codex
